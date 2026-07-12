@@ -4,6 +4,14 @@ import Spinner from '../../components/Spinner';
 
 const STATUSES = ['Placed', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
 
+const STATUS_STYLES = {
+  Placed: 'bg-slate-100 text-slate-700',
+  Processing: 'bg-amber-100 text-amber-700',
+  Shipped: 'bg-blue-100 text-blue-700',
+  Delivered: 'bg-brand-100 text-brand-700',
+  Cancelled: 'bg-red-100 text-red-700',
+};
+
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,22 +51,24 @@ export default function AdminOrders() {
   }
 
   return (
-    <div className="py-4">
-      <h1 className="text-2xl font-bold text-slate-800">Admin · Orders</h1>
+    <div className="animate-fade-up py-4">
+      <h1 className="section-heading">Admin · Orders</h1>
 
       {orders.length === 0 ? (
         <p className="mt-6 text-slate-500">No orders placed yet.</p>
       ) : (
         <div className="mt-6 flex flex-col gap-4">
           {orders.map((order) => (
-            <div key={order._id} className="card p-5">
+            <div key={order._id} className="card p-5 transition-shadow hover:shadow-md">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p className="text-xs text-slate-400">Order ID</p>
-                  <p className="font-mono text-sm text-slate-600">{order._id}</p>
-                  <p className="mt-1 text-sm text-slate-600">
-                    {order.user?.name} · {order.user?.email}
-                  </p>
+                <div className="flex items-center gap-3">
+                  <span className={`badge ${STATUS_STYLES[order.orderStatus]}`}>{order.orderStatus}</span>
+                  <div>
+                    <p className="font-mono text-xs text-slate-400">{order._id}</p>
+                    <p className="text-sm text-slate-600">
+                      {order.user?.name} · {order.user?.email}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-2">

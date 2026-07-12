@@ -38,10 +38,11 @@ export default function MyOrders() {
 
   if (orders.length === 0) {
     return (
-      <div className="py-24 text-center">
+      <div className="animate-fade-up flex flex-col items-center gap-3 py-24 text-center">
+        <span className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-100 text-4xl">📦</span>
         <h1 className="text-2xl font-bold text-slate-800">No orders yet</h1>
-        <p className="mt-2 text-slate-500">Your placed orders will show up here.</p>
-        <Link to="/" className="btn-primary mt-6 inline-flex">
+        <p className="text-slate-500">Your placed orders will show up here.</p>
+        <Link to="/" className="btn-primary mt-3 inline-flex">
           Start Shopping
         </Link>
       </div>
@@ -49,20 +50,18 @@ export default function MyOrders() {
   }
 
   return (
-    <div className="py-4">
-      <h1 className="text-2xl font-bold text-slate-800">My Orders</h1>
+    <div className="animate-fade-up py-4">
+      <h1 className="section-heading">My Orders</h1>
 
       <div className="mt-6 flex flex-col gap-4">
         {orders.map((order) => (
-          <div key={order._id} className="card p-5">
+          <div key={order._id} className="card p-5 transition-shadow hover:shadow-md">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <p className="text-xs text-slate-400">Order ID</p>
                 <p className="font-mono text-sm text-slate-600">{order._id}</p>
               </div>
-              <span
-                className={`rounded-full px-3 py-1 text-xs font-medium ${STATUS_STYLES[order.orderStatus]}`}
-              >
+              <span className={`badge ${STATUS_STYLES[order.orderStatus]}`}>
                 {order.orderStatus}
               </span>
             </div>

@@ -93,14 +93,14 @@ export default function AdminMedicineForm() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl py-4">
-      <h1 className="text-2xl font-bold text-slate-800">
+    <div className="animate-fade-up mx-auto max-w-2xl py-4">
+      <h1 className="section-heading">
         {isEdit ? 'Edit Medicine' : 'Add Medicine'}
       </h1>
 
       <form onSubmit={handleSubmit} className="card mt-6 flex flex-col gap-4 p-6">
         {error && (
-          <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
+          <div className="animate-fade-in rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
         )}
 
         <div>

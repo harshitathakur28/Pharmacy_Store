@@ -57,32 +57,39 @@ export default function MedicineDetail() {
   }
 
   return (
-    <div className="grid gap-8 py-4 md:grid-cols-2">
-      <div className="card overflow-hidden bg-slate-50">
+    <div className="animate-fade-up grid gap-10 py-4 md:grid-cols-2">
+      <nav className="col-span-full -mb-4 flex items-center gap-1.5 text-sm text-slate-400">
+        <Link to="/" className="transition-colors hover:text-brand-700">
+          Home
+        </Link>
+        <span>/</span>
+        <span className="text-slate-500">{medicine.category}</span>
+      </nav>
+
+      <div className="card relative aspect-square overflow-hidden bg-slate-50">
         <img src={medicine.imageUrl} alt={medicine.name} className="h-full w-full object-cover" />
+        {medicine.requiresPrescription && (
+          <span className="badge absolute left-4 top-4 bg-amber-100/95 text-amber-700 backdrop-blur">
+            Prescription required
+          </span>
+        )}
       </div>
 
       <div>
-        <span className="text-xs font-medium uppercase tracking-wide text-brand-600">
+        <span className="text-xs font-semibold uppercase tracking-wide text-brand-600">
           {medicine.category}
         </span>
-        <h1 className="mt-1 text-2xl font-bold text-slate-800">{medicine.name}</h1>
+        <h1 className="mt-1 text-3xl font-bold tracking-tight text-slate-900">{medicine.name}</h1>
         <p className="mt-1 text-sm text-slate-500">by {medicine.manufacturer}</p>
 
-        {medicine.requiresPrescription && (
-          <div className="mt-3 inline-block rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700">
-            Prescription required
-          </div>
-        )}
+        <p className="mt-5 leading-relaxed text-slate-600">{medicine.description}</p>
 
-        <p className="mt-4 text-slate-600">{medicine.description}</p>
-
-        <div className="mt-6 flex items-baseline gap-3">
+        <div className="mt-6 flex items-baseline gap-3 border-t border-slate-100 pt-6">
           <span className="text-3xl font-bold text-slate-900">₹{medicine.price}</span>
           {medicine.stock > 0 ? (
-            <span className="text-sm text-brand-600">In stock ({medicine.stock} available)</span>
+            <span className="badge bg-brand-50 text-brand-700">In stock · {medicine.stock} available</span>
           ) : (
-            <span className="text-sm text-red-600">Out of stock</span>
+            <span className="badge bg-red-50 text-red-600">Out of stock</span>
           )}
         </div>
 
@@ -90,19 +97,19 @@ export default function MedicineDetail() {
           <>
             <div className="mt-6 flex items-center gap-3">
               <span className="label !mb-0">Quantity</span>
-              <div className="flex items-center rounded-lg border border-slate-300">
+              <div className="flex items-center rounded-xl border border-slate-300">
                 <button
                   type="button"
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  className="px-3 py-1.5 text-slate-600 hover:bg-slate-50"
+                  className="px-3 py-1.5 text-slate-600 transition-colors hover:bg-slate-50"
                 >
                   −
                 </button>
-                <span className="w-10 text-center">{qty}</span>
+                <span className="w-10 text-center font-medium">{qty}</span>
                 <button
                   type="button"
                   onClick={() => setQty((q) => Math.min(medicine.stock, q + 1))}
-                  className="px-3 py-1.5 text-slate-600 hover:bg-slate-50"
+                  className="px-3 py-1.5 text-slate-600 transition-colors hover:bg-slate-50"
                 >
                   +
                 </button>

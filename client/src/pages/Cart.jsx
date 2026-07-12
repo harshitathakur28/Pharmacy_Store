@@ -17,10 +17,11 @@ export default function Cart() {
 
   if (items.length === 0) {
     return (
-      <div className="py-24 text-center">
+      <div className="animate-fade-up flex flex-col items-center justify-center gap-3 py-24 text-center">
+        <span className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-100 text-4xl">🛒</span>
         <h1 className="text-2xl font-bold text-slate-800">Your cart is empty</h1>
-        <p className="mt-2 text-slate-500">Browse our catalog and add some items.</p>
-        <Link to="/" className="btn-primary mt-6 inline-flex">
+        <p className="text-slate-500">Browse our catalog and add some items.</p>
+        <Link to="/" className="btn-primary mt-3 inline-flex">
           Continue Shopping
         </Link>
       </div>
@@ -28,21 +29,21 @@ export default function Cart() {
   }
 
   return (
-    <div className="py-4">
-      <h1 className="text-2xl font-bold text-slate-800">
+    <div className="animate-fade-up py-4">
+      <h1 className="section-heading">
         Your Cart <span className="text-base font-normal text-slate-500">({totalItems} items)</span>
       </h1>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-3">
         <div className="flex flex-col gap-3 lg:col-span-2">
           {items.map((item) => (
-            <div key={item.medicineId} className="card flex items-center gap-4 p-4">
+            <div key={item.medicineId} className="card flex flex-wrap items-center gap-4 p-4 transition-shadow hover:shadow-md">
               <img
                 src={item.imageUrl}
                 alt={item.name}
-                className="h-16 w-16 rounded-lg object-cover"
+                className="h-16 w-16 rounded-xl object-cover"
               />
-              <div className="flex-1">
+              <div className="min-w-[8rem] flex-1">
                 <Link
                   to={`/medicines/${item.medicineId}`}
                   className="font-medium text-slate-800 hover:text-brand-700"
@@ -52,19 +53,19 @@ export default function Cart() {
                 <p className="text-sm text-slate-500">₹{item.price} each</p>
               </div>
 
-              <div className="flex items-center rounded-lg border border-slate-300">
+              <div className="flex items-center rounded-xl border border-slate-300">
                 <button
                   type="button"
                   onClick={() => updateQty(item.medicineId, item.qty - 1)}
-                  className="px-2.5 py-1 text-slate-600 hover:bg-slate-50"
+                  className="px-2.5 py-1 text-slate-600 transition-colors hover:bg-slate-50"
                 >
                   −
                 </button>
-                <span className="w-8 text-center text-sm">{item.qty}</span>
+                <span className="w-8 text-center text-sm font-medium">{item.qty}</span>
                 <button
                   type="button"
                   onClick={() => updateQty(item.medicineId, item.qty + 1)}
-                  className="px-2.5 py-1 text-slate-600 hover:bg-slate-50"
+                  className="px-2.5 py-1 text-slate-600 transition-colors hover:bg-slate-50"
                 >
                   +
                 </button>
@@ -77,7 +78,7 @@ export default function Cart() {
               <button
                 type="button"
                 onClick={() => removeItem(item.medicineId)}
-                className="text-sm text-red-500 hover:text-red-700"
+                className="text-sm text-red-500 transition-colors hover:text-red-700"
                 aria-label={`Remove ${item.name}`}
               >
                 Remove
@@ -86,7 +87,7 @@ export default function Cart() {
           ))}
         </div>
 
-        <div className="card h-fit p-6">
+        <div className="card sticky top-20 h-fit p-6">
           <h2 className="font-semibold text-slate-800">Order Summary</h2>
           <div className="mt-4 flex justify-between text-sm text-slate-600">
             <span>Subtotal</span>
@@ -94,9 +95,9 @@ export default function Cart() {
           </div>
           <div className="mt-1 flex justify-between text-sm text-slate-600">
             <span>Delivery</span>
-            <span className="text-brand-600">Free</span>
+            <span className="font-medium text-brand-600">Free</span>
           </div>
-          <div className="mt-3 flex justify-between border-t border-slate-200 pt-3 font-semibold text-slate-800">
+          <div className="mt-3 flex justify-between border-t border-slate-200 pt-3 text-base font-semibold text-slate-800">
             <span>Total</span>
             <span>₹{totalAmount}</span>
           </div>

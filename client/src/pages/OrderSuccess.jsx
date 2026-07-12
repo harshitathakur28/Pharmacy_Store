@@ -29,16 +29,16 @@ export default function OrderSuccess() {
 
   return (
     <div className="mx-auto max-w-lg py-12 text-center">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-3xl text-brand-600">
+      <div className="animate-pop mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-4xl text-white shadow-lg shadow-brand-600/30">
         ✓
       </div>
-      <h1 className="mt-4 text-2xl font-bold text-slate-800">Order placed successfully!</h1>
-      <p className="mt-2 text-slate-500">
+      <h1 className="animate-fade-up mt-5 text-2xl font-bold text-slate-800">Order placed successfully!</h1>
+      <p className="animate-fade-up mt-2 text-slate-500">
         Thank you for your order. We'll get it ready for delivery.
       </p>
 
       {order && (
-        <div className="card mt-6 p-6 text-left text-sm">
+        <div className="card animate-fade-up mt-6 p-6 text-left text-sm">
           <div className="flex justify-between">
             <span className="text-slate-500">Order ID</span>
             <span className="font-mono text-slate-700">{order._id}</span>
@@ -49,7 +49,7 @@ export default function OrderSuccess() {
               {order.paymentMethod} ({order.paymentStatus})
             </span>
           </div>
-          <div className="mt-2 flex justify-between">
+          <div className="mt-2 flex justify-between border-t border-slate-100 pt-2">
             <span className="text-slate-500">Total</span>
             <span className="font-semibold text-slate-800">₹{order.totalAmount}</span>
           </div>

@@ -57,13 +57,16 @@ export default function Checkout() {
   }
 
   return (
-    <div className="py-4">
-      <h1 className="text-2xl font-bold text-slate-800">Checkout</h1>
+    <div className="animate-fade-up py-4">
+      <h1 className="section-heading">Checkout</h1>
 
       <form onSubmit={handlePlaceOrder} className="mt-6 grid gap-8 lg:grid-cols-3">
         <div className="flex flex-col gap-6 lg:col-span-2">
           <div className="card p-6">
-            <h2 className="font-semibold text-slate-800">Shipping Address</h2>
+            <h2 className="flex items-center gap-2 font-semibold text-slate-800">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-100 text-xs text-brand-700">1</span>
+              Shipping Address
+            </h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <label className="label">Address</label>
@@ -116,11 +119,14 @@ export default function Checkout() {
           </div>
 
           <div className="card p-6">
-            <h2 className="font-semibold text-slate-800">Payment Method</h2>
+            <h2 className="flex items-center gap-2 font-semibold text-slate-800">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-100 text-xs text-brand-700">2</span>
+              Payment Method
+            </h2>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row">
               <label
-                className={`flex flex-1 cursor-pointer items-center gap-3 rounded-lg border p-4 ${
-                  paymentMethod === 'COD' ? 'border-brand-600 bg-brand-50' : 'border-slate-300'
+                className={`flex flex-1 cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all duration-150 ${
+                  paymentMethod === 'COD' ? 'border-brand-600 bg-brand-50 ring-2 ring-brand-500/15' : 'border-slate-300 hover:border-slate-400'
                 }`}
               >
                 <input
@@ -136,8 +142,8 @@ export default function Checkout() {
               </label>
 
               <label
-                className={`flex flex-1 cursor-pointer items-center gap-3 rounded-lg border p-4 ${
-                  paymentMethod === 'UPI' ? 'border-brand-600 bg-brand-50' : 'border-slate-300'
+                className={`flex flex-1 cursor-pointer items-center gap-3 rounded-xl border p-4 transition-all duration-150 ${
+                  paymentMethod === 'UPI' ? 'border-brand-600 bg-brand-50 ring-2 ring-brand-500/15' : 'border-slate-300 hover:border-slate-400'
                 }`}
               >
                 <input
@@ -170,7 +176,7 @@ export default function Checkout() {
           </div>
         </div>
 
-        <div className="card h-fit p-6">
+        <div className="card sticky top-20 h-fit p-6">
           <h2 className="font-semibold text-slate-800">Order Summary</h2>
           <ul className="mt-4 flex flex-col gap-2 text-sm text-slate-600">
             {items.map((item) => (
